@@ -76,7 +76,6 @@ function render(cvr, filings) {
         ${numberCell(f.cash)}
         ${numberCell(f.netIncome)}
         ${numberCell(f.price)}
-        ${numberCell(f.multiple, { currency: false, decimals: 2 })}
       </tr>`;
     })
     .join("");
@@ -107,13 +106,12 @@ function render(cvr, filings) {
             <th>Cash</th>
             <th>Net income</th>
             <th>Valuation</th>
-            <th title="The multiple is estimated using a linear model relating public companies' market capitalization-to-assets ratios to their profitability and leverage. When multiplied by total assets, it gives the company's valuation." style="cursor: help; text-decoration: underline dotted;">Multiple</th>
           </tr>
         </thead>
         <tbody id="history-body">${tableRows}</tbody>
       </table>
       <p style="font-size:12px;color:var(--text-muted);margin:12px 0 0">
-                Monetary values are shown in U.S. dollars (USD).${latest.multiple === 0 ? " For public companies, the multiple is set to 0, and valuation represents the market capitalization closest to the filing date." : ""}
+                Monetary values are shown in U.S. dollars (USD).${latest.multiple === 0 ? " For public companies, the valuation represents the market capitalization closest to the filing date." : ""}
       </p>
     </section>
   `;
