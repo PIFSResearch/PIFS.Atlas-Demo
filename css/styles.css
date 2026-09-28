@@ -30,10 +30,13 @@ body {
 /* ---------- Landing / map ---------- */
 
 #map {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
+}
+
+#map canvas {
+  display: block;
 }
 
 .overlay-panel {
