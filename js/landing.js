@@ -498,8 +498,9 @@ function wireControls() {
 async function main() {
   // Render the basemap immediately so the page feels responsive while the
   // parquet file downloads and parses.
-  deckgl = new DeckGL({
+   deckgl = new DeckGL({
     container: "map",
+    useDevicePixels: false,
     mapStyle: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
     initialViewState: INITIAL_VIEW_STATE,
     controller: true,
