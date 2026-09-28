@@ -63,26 +63,13 @@ function render(cvr, filings) {
 
   document.title = `${latest.name || "CVR " + cvr} · Denmark Explorer`;
 
-  const badges = [
-    latest.filingUrl
-      ? `<span class="badge"><a href="${encodeURI(
-          latest.filingUrl
-                )}" target="_blank" rel="noopener" title="Open the company's financial filing in XBRL/XML, a standardized electronic format for reporting structured financial data.">Latest filing ↗</a></span>`
-      : "",
-    `<span class="badge">Filings <strong>${filings.length}</strong></span>`,
-  ]
-    .filter(Boolean)
-    .join("");
+  const badges = `<span class="badge">Filings <strong>${filings.length}</strong></span>`;
 
-  // Table rows: newest first for readability. Rows with a filing URL are
-  // clickable and open that specific filing.
+  // Table rows: newest first for readability.
   const tableRows = [...filings]
     .reverse()
     .map((f) => {
-      const clickable = f.filingUrl
-        ? ` class="clickable" data-url="${escapeHtml(f.filingUrl)}"`
-        : "";
-      return `<tr${clickable}>
+      return `<tr>
         <td>${f.filingDate ?? "—"}</td>
         ${numberCell(f.assets)}
         ${numberCell(f.debt)}
@@ -126,16 +113,10 @@ function render(cvr, filings) {
         <tbody id="history-body">${tableRows}</tbody>
       </table>
       <p style="font-size:12px;color:var(--text-muted);margin:12px 0 0">
-        Monetary values are shown in U.S. dollars (USD). For public companies, the multiple is set to 0, and valuation represents the market capitalization closest to the filing date. Click a row to open its financial filing in XBRL/XML, a standardized electronic format for reporting structured financial data.
+                Monetary values are shown in U.S. dollars (USD).${latest.multiple === 0 ? " For public companies, the multiple is set to 0, and valuation represents the market capitalization closest to the filing date." : ""}
       </p>
     </section>
   `;
-
-  // Row click -> open that filing's document in a new tab.
-  document.getElementById("history-body").addEventListener("click", (e) => {
-    const tr = e.target.closest("tr[data-url]");
-    if (tr) window.open(tr.dataset.url, "_blank", "noopener");
-  });
 
   renderChart(filings);
 }
