@@ -92,12 +92,12 @@ function render(cvr, filings) {
     <div class="badges">${badges}</div>
 
     <section class="card">
-      <h2>Valuation over time</h2>
+      <h2>Valuation over time (USD) </h2>
       <div class="chart-wrap"><canvas id="price-chart"></canvas></div>
     </section>
 
     <section class="card">
-      <h2>Financial history</h2>
+      <h2>Financial history (USD) </h2>
       <table>
         <thead>
           <tr>
