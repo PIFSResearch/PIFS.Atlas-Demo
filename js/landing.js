@@ -539,7 +539,25 @@ async function main() {
       };
     },
   });
+  let mapResizeTimer;
 
+  window.addEventListener("resize", () => {
+    clearTimeout(mapResizeTimer);
+
+    mapResizeTimer = setTimeout(() => {
+      const mapEl = document.getElementById("map");
+
+      deckgl.setProps({
+        width: mapEl.clientWidth,
+        height: mapEl.clientHeight,
+      });
+
+      requestAnimationFrame(() => {
+        deckgl.redraw("Browser resized");
+        deckgl.getMapboxMap()?.resize();
+      });
+    }, 150);
+  });
   wireControls();
 
   let rows;
