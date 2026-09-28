@@ -500,7 +500,6 @@ async function main() {
   // parquet file downloads and parses.
    deckgl = new DeckGL({
     container: "map",
-    useDevicePixels: false,
     mapStyle: "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
     initialViewState: INITIAL_VIEW_STATE,
     controller: true,
