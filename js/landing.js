@@ -397,15 +397,10 @@ function resetFilters() {
 
 function locateUser() {
   const button = document.getElementById("use-location");
-  const message = document.getElementById("location-status");
 
-  if (!navigator.geolocation) {
-    message.textContent = "Location is not supported by this browser.";
-    return;
-  }
+  if (!navigator.geolocation) return;
 
   button.disabled = true;
-  message.textContent = "Finding your location…";
 
   navigator.geolocation.getCurrentPosition(
     ({ coords }) => {
@@ -423,17 +418,9 @@ function locateUser() {
         transitionDuration: 800,
         transitionInterpolator: new FlyToInterpolator(),
       });
-
-      message.textContent = `Your location is marked in green.`;
     },
-    (error) => {
+    () => {
       button.disabled = false;
-      message.textContent =
-        error.code === 1
-                ? "Users need to enable location services on their device and for their browser."
-          : error.code === 3
-            ? "Finding your location took too long. Please try again."
-            : "Your location is unavailable. Please try again.";
     },
     {
       enableHighAccuracy: true,
