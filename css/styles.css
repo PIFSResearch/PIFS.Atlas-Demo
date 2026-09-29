@@ -35,6 +35,9 @@ body {
   overflow: hidden;
 }
 
+#location-status {
+  margin-top: 10px;
+}
 .overlay-panel {
   position: absolute;
   z-index: 10;
