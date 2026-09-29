@@ -397,10 +397,15 @@ function resetFilters() {
 
 function locateUser() {
   const button = document.getElementById("use-location");
+  const message = document.getElementById("location-status");
 
-  if (!navigator.geolocation) return;
+  if (!navigator.geolocation) {
+    message.textContent = "Location not found. Please try again.";
+    return;
+  }
 
   button.disabled = true;
+  message.textContent = "Finding your location…";
 
   navigator.geolocation.getCurrentPosition(
     ({ coords }) => {
@@ -418,9 +423,18 @@ function locateUser() {
         transitionDuration: 800,
         transitionInterpolator: new FlyToInterpolator(),
       });
+
+      message.textContent = "Your location is marked in green.";
     },
-    () => {
+    (error) => {
       button.disabled = false;
+
+      message.textContent =
+        error.code === 1
+          ? "Location not found. Please enable location services on your device and for your browser."
+          : error.code === 3
+            ? "Finding your location took too long. Please try again."
+            : "Location not found. Please try again.";
     },
     {
       enableHighAccuracy: true,
