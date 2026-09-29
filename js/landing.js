@@ -430,7 +430,7 @@ function locateUser() {
       button.disabled = false;
       message.textContent =
         error.code === 1
-                   ? "Location access denied. Enable Location Services on your device and allow location access for your browser and this website."
+                ? "Users need to enable location services on their device and for their browser."
           : error.code === 3
             ? "Finding your location took too long. Please try again."
             : "Your location is unavailable. Please try again.";
