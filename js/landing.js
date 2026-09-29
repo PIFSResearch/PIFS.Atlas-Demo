@@ -539,6 +539,23 @@ async function main() {
       };
     },
   });
+  
+  const baseMap = deckgl.getMapboxMap();
+
+  const useEnglishSeaNames = () => {
+    for (const id of ["watername_sea", "watername_ocean"]) {
+      if (baseMap.getLayer(id)) {
+        baseMap.setLayoutProperty(id, "text-field", "{name_en}");
+      }
+    }
+  };
+
+  if (baseMap.isStyleLoaded()) {
+    useEnglishSeaNames();
+  } else {
+    baseMap.once("style.load", useEnglishSeaNames);
+  }
+  
   let mapResizeTimer;
 
   window.addEventListener("resize", () => {
